@@ -1,0 +1,595 @@
+:root {
+  --color-background: #0a0a0a; /* Un negro más profundo */
+  --color-surface: #181818; /* Superficie ligeramente más clara */
+  --color-primary: #ff7700; /* Naranja más vibrante */
+  --color-primary-light: #ff9933; /* Naranja claro para acentos */
+  --color-text: #f0f0f0; /* Texto principal muy claro */
+  --color-text-secondary: #b0b0b0; /* Texto secundario grisáceo */
+  --font-heading: "Cinzel Decorative", serif; /* Fuente más decorativa y épica */
+  --font-body: "Raleway", sans-serif;
+  --container-width: 1100px;
+  --border-radius: 10px; /* Bordes más redondeados */
+  --shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.7);
+  --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Estilos Base y Reset --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+} /* Ajustado para navbar */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.8; /* Mayor interlineado */
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* Prevenir scroll horizontal */
+}
+.container {
+  width: 90%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  color: var(--color-primary-light);
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+p {
+  margin-bottom: 1.2rem;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+}
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+a:hover {
+  color: var(--color-primary-light);
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Barra de Navegación --- */
+#navbar {
+  background-color: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(12px);
+  padding: 0.8rem 0; /* Más compacta */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 153, 51, 0.2); /* Borde naranja sutil */
+  transition: background-color 0.3s ease;
+}
+#navbar.scrolled {
+  background-color: rgba(10, 10, 10, 0.9);
+}
+#navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-brand {
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: 1px;
+}
+.nav-links {
+  list-style-type: none;
+  display: flex;
+  gap: 2.5rem;
+}
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  padding: 0.5rem 0;
+  position: relative;
+  letter-spacing: 0.5px;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+.nav-links a:hover {
+  color: var(--color-primary-light);
+}
+
+/* --- Sección Hero --- */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -2;
+  filter: brightness(0.7) contrast(1.1); /* Ajuste de video */
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.9) 90%);
+  z-index: -1;
+}
+.hero-content {
+  z-index: 1;
+}
+.hero-title {
+  font-size: clamp(4rem, 12vw, 8rem);
+  color: white;
+  letter-spacing: 5px;
+  margin-bottom: 0.8rem;
+  font-weight: 900;
+  text-shadow: 0 0 15px rgba(255, 119, 0, 0.5), 0 0 30px rgba(255, 119, 0, 0.3);
+}
+.hero-subtitle {
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  text-transform: none;
+  margin-bottom: 2.5rem;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+.cta-button {
+  display: inline-block;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-light));
+  color: var(--color-background);
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4);
+  transition: all 0.3s ease;
+}
+.cta-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 119, 0, 0.6);
+}
+.scroll-down-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  animation: bounce 2s infinite;
+  z-index: 2;
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* Animaciones Hero */
+.animate-hero-title {
+  animation: fadeInDown 1s ease-out 0.5s backwards;
+}
+.animate-hero-subtitle {
+  animation: fadeInUp 1s ease-out 0.8s backwards;
+}
+.animate-hero-button {
+  animation: zoomIn 0.8s ease-out 1.2s backwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- Secciones de Contenido --- */
+.content-section {
+  padding: 5rem 0;
+  position: relative;
+}
+.alt-bg {
+  background-color: var(--color-surface);
+}
+.section-title {
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+.section-intro {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 3.5rem auto;
+  font-size: 1.15rem;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+/* --- Biografía --- */
+.bio-container {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+.bio-image {
+  flex-basis: 350px;
+  flex-shrink: 0;
+}
+.bio-image img {
+  border-radius: var(--border-radius);
+  border: 6px solid var(--color-surface);
+  box-shadow: var(--shadow-strong);
+  filter: grayscale(0.3) contrast(1.1);
+}
+.bio-text .section-title {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.bio-text p {
+  font-size: 1.05rem;
+}
+
+/* --- Galería --- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+.gallery-item {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-medium);
+  cursor: pointer;
+  aspect-ratio: 3 / 4; /* Para mantener proporción */
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.gallery-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.9) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.gallery-item span {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.1s;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+.gallery-item:hover img {
+  transform: scale(1.15);
+}
+.gallery-item:hover::after,
+.gallery-item:hover span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Sección de Historia --- */
+.historia-bg {
+  background-color: var(--color-background);
+  /* Podrías añadir una textura sutil de fondo si quieres */
+  /* background-image: url('path/to/subtle-texture.png'); */
+}
+.story-block,
+.character-block {
+  margin-bottom: 4rem;
+}
+.sinopsis {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 4rem auto;
+  padding: 2.5rem;
+  background: rgba(24, 24, 24, 0.7);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 119, 0, 0.15);
+  box-shadow: var(--shadow-medium);
+}
+.sinopsis h3 {
+  font-size: 2.2rem;
+  color: var(--color-primary);
+}
+.section-title-sub {
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 5rem 0 3rem 0;
+  color: var(--color-text);
+  letter-spacing: 1px;
+}
+.character-block {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+.character-block.reverse {
+  flex-direction: row-reverse;
+}
+.character-image {
+  flex: 0.8;
+}
+.character-image img {
+  border-radius: var(--border-radius);
+  border: 5px solid var(--color-primary);
+  box-shadow: 0 0 35px rgba(255, 119, 0, 0.5), 0 0 15px rgba(255, 119, 0, 0.3) inset;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.character-image:hover img {
+  transform: scale(1.03) rotate(-1deg);
+  box-shadow: 0 0 45px rgba(255, 119, 0, 0.7), 0 0 20px rgba(255, 119, 0, 0.4) inset;
+}
+.character-text {
+  flex: 1.2;
+}
+.character-text h3 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary-light);
+}
+.character-text p {
+  font-size: 1.05rem;
+}
+
+/* --- Sección de Donaciones --- */
+.donation-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+.donation-card {
+  background-color: var(--color-background);
+  padding: 2.5rem 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  border: 1px solid rgba(255, 119, 0, 0.2);
+  box-shadow: var(--shadow-medium);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.donation-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+.donation-card.featured {
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+  box-shadow: 0 10px 40px rgba(255, 119, 0, 0.3);
+}
+.donation-card.featured:hover {
+  transform: scale(1.08) translateY(-5px);
+}
+.donation-icon {
+  margin-bottom: 1.5rem;
+}
+.donation-icon svg {
+  stroke: var(--color-primary);
+  transition: transform 0.3s ease;
+}
+.donation-card:hover .donation-icon svg {
+  transform: scale(1.1);
+}
+.donation-card h3 {
+  font-size: 1.8rem;
+  color: var(--color-primary-light);
+  margin-bottom: 0.5rem;
+}
+.donation-amount {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+.donation-card p {
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  min-height: 60px;
+}
+.cta-button-secondary {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--color-primary);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid var(--color-primary);
+  transition: all 0.3s ease;
+}
+.cta-button-secondary:hover {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  transform: scale(1.05);
+}
+.donation-note {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 3rem;
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+/* --- Footer --- */
+footer {
+  background-color: #000; /* Negro absoluto para el footer */
+  padding: 4rem 0 3rem 0;
+  text-align: center;
+  border-top: 1px solid rgba(255, 119, 0, 0.1);
+}
+.footer-quote {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.15rem;
+  margin-bottom: 2.5rem;
+  color: var(--color-text-secondary);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.footer-social a {
+  color: var(--color-text-secondary);
+}
+.footer-social a svg {
+  width: 28px;
+  height: 28px;
+}
+.footer-social a:hover {
+  color: white;
+  transform: scale(1.15) rotate(5deg);
+}
+.footer-copy {
+  font-size: 0.9rem;
+  color: #777;
+  letter-spacing: 0.5px;
+}
+
+/* --- Animaciones de Scroll (Fade-in) --- */
+.fade-in-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.fade-in-element.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Responsividad --- */
+@media (max-width: 992px) {
+  .bio-container,
+  .character-block,
+  .character-block.reverse {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  .bio-text .section-title,
+  .character-text h3 {
+    text-align: center;
+  }
+  .bio-image {
+    margin: 0 auto 2rem auto;
+  }
+  .character-image {
+    margin: 0 auto;
+  }
+}
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  } /* Implementar menú hamburguesa en un futuro */
+  .hero-title {
+    font-size: clamp(3rem, 10vw, 5rem);
+  }
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+  }
+  .section-title {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+  }
+  .donation-options {
+    grid-template-columns: 1fr;
+  }
+  .donation-card.featured {
+    transform: scale(1);
+  } /* Evitar que destaque demasiado en móvil */
+}
